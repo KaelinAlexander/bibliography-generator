@@ -1,0 +1,3 @@
+class BibliographiesController < ApplicationController
+
+end
