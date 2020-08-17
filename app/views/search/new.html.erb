@@ -1,0 +1,16 @@
+<h1>New Search</h1>
+<h2>Search By:</h2>
+<br>
+<%= form_tag search_path do %>
+<label>Keyword:</label><br>
+<%= text_field_tag :'search[q]' %>
+<br>
+<label>Title:</label><br>
+<%= text_field_tag :'search[title]' %>
+<br>
+<label>Author/Editor:</label><br>
+<%= text_field_tag :'search[name]' %>
+<br>
+<br>
+<%= submit_tag "Search" %>
+<% end %>

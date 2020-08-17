@@ -1,0 +1,6 @@
+<h1>Make a Text by Title</h1>
+<%= form_for @text do |f| %>
+<%= f.label 'Text Title' %><br>
+<%= f.text_field :title %><br>
+<%= f.submit "Submit Search" %>
+<% end %>

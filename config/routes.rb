@@ -4,5 +4,8 @@ Rails.application.routes.draw do
   resources :texts
   resources :citations
   resources :authors
+
+  get 'search', to: 'search#new'
+  post 'search', to: 'search#create'
   
 end
