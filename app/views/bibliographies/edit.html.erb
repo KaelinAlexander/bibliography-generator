@@ -1,1 +1,17 @@
+<% @style = [["MLA", "MLA"], ["Chicago Style", "Chicago"], ["APA", "APA"]] %>
 <h1>Bibliography Edit Page</h1>
+<%= form_for @bib do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name %>
+<br>
+<br>
+<%= f.label :use %>
+<%= f.text_field :use %>
+<br>
+<br>
+<%= f.label 'Default Style' %>
+<%= f.select(:style, options_for_select(@style, :selected => f.object.style)) %>
+<br>
+<br>
+<%= f.submit %>
+<% end %>

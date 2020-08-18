@@ -3,4 +3,7 @@ class Bibliography < ActiveRecord::Base
     has_many :citations
     has_many :texts, through: :citations
 
+    validates :name, presence: true
+    validates :style, presence: true
+
 end

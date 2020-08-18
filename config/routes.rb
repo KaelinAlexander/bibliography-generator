@@ -15,5 +15,6 @@ get '/logout' => 'sessions#destroy'
 get '/hello' => 'users#show'
 get '/signup' => 'users#new'
 post '/signup' => 'users#create'
+get 'bibliographies/:id/delete' => 'bibliographies#confirm'
   
 end

@@ -1,8 +1,27 @@
 <h1>Bibliography Index Page</h1>
-<% if @bibliographies %>
-<% @bibliographies.each do |bib| %>
-<%= bib.name %>
-<% end %>
+<% if @bibs %>
+<div class="row">
+    <% @bibs.each do |bib| %>
+    <div class="col s12 m6 l4">
+        <div class="card small grey">
+        <div class="card-content white-text">
+            <span class="card-title"><%= bib.name %></span>
+            <p><%= bib.citations.count %> Citation(s)</p>
+            <br>
+            <p><%= bib.use %></p>
+            <br>
+            <p><%= bib.style %></p>
+        </div>
+        <div class="card-action">
+            <a class="white-text" href='/bibliographies/<%= bib.id %>'><i class="material-icons">format_list_bulleted</i></a>
+            <a class="white-text" href='/bibliographies/<%= bib.id %>/edit'><i class="material-icons">edit</i></a>
+            <a class="white-text" href='/<%= bib.id %>/citations/new'><i class="material-icons">add</i></a>
+            <a class="white-text" href='/bibliographies/<%= bib.id %>/delete'><i class="material-icons">delete</i></a>
+        </div>
+        </div>
+        </div>
+    <% end %>
+    </div>
 <% else %>
 <p>There are no bibliograhies to display. Make one?</p>
 <% end %>
