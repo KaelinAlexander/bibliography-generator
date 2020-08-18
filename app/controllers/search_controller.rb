@@ -2,18 +2,28 @@ require 'uri'
 
 class SearchController < ApplicationController
 
-    def show
+    def results
+        @results = session[:search_results]
     end
     
     def new
     end
 
     def create
-        search_hash = params[:search]
-        query = search_hash.each {|k,v| search_hash[k] = URI.escape(v)}
+        query = search_params.to_h
         search = LibraryService.new
-        @results = search.get_text_by_title(escaped_title)
-        @text.subtitle = search.get_text_by_subtitle(escaped_title)
+        search_results = search.get_results(query)
+        if search_results != nil
+            redirect_to results_path
+        else
+            redirect_to search_path
+        end
     end 
+
+    private
+
+        def search_params
+            params.require(:search).permit(:q, :title, :name)
+        end
 
 end

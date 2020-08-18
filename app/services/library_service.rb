@@ -1,9 +1,20 @@
 class LibraryService
 
     def get_results(query)
-        response = HTTP.get("https://api.lib.harvard.edu/v2/items.json?#{category}=#{query}")
+        append = ""
+        query.each do |k,v|
+            if v != nil && v != ""
+                append << "#{k}=#{URI.encode(v)}&" 
+            end
+        end
+        search_parameters = append.chop
+        response = HTTP.get("https://api.lib.harvard.edu/v2/items.json?#{search_parameters}")
         parsed_response = JSON.parse(response)
-        parsed_response["items"]["mods"]
+        if parsed_response["items"] != nil
+            parsed_response["items"]["mods"]
+        else
+            nil
+        end
     end
     
     def get_text_by_title(title)
@@ -56,7 +67,7 @@ class LibraryService
     end
 
     def get_author(text_hash)
-        text_hash["name"]
+
     end
 
     # def get_

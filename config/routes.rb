@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   get 'search', to: 'search#new'
   post 'search', to: 'search#create'
+  get 'results', to: 'search#results'
   
 end
