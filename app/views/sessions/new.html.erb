@@ -1,6 +1,14 @@
-<%= form_tag ({controller: 'sessions', action: 'create', method: 'post'}) do %>
-    <input type='text name='username'>
-    <input type='password' name='password'
-    <input type=submit value='login'>
-  <% end %>
-  
+  <h4>Please Log In</h4>
+<%= form_tag login_path do %>
+<label>Username:</label><br>
+<%= text_field_tag :'user[username]' %>
+<br>
+<label>Password:</label><br>
+<%= text_field_tag :'user[password]' %>
+<br>
+<br>
+<button type='submit' id='submit' class='btn grey waves-effect waves-light'>
+Log In
+<i class='material-icons right'>send</i>
+</button>
+<% end %>

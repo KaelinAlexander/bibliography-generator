@@ -40,4 +40,12 @@ module ApplicationHelper
         end 
     end
 
+    def logged_in
+        !!session[:user_id]
+    end
+
+    def not_logged_in
+        !!!session[:user_id]
+    end
+
 end
