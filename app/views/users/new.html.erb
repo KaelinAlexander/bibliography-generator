@@ -1,4 +1,20 @@
-<h1>New User Test</h1>
+<% if @user.errors.any? %>
+<div id="error_explanation">
+<h4>
+<%= pluralize(@user.errors.count, "error") %>
+prohibited this article from being saved:
+</h4>
+ 
+<ul>
+<% @user.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+<% end %>
+</ul>
+</div>
+<% end %>
+
+
+<h3>New User Test</h3>
 <%= form_for :user, url: '/users' do |f| %>
     Username: <%= f.text_field :username %>
     Email: <%= f.text_field :email %>
