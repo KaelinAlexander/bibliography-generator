@@ -5,8 +5,15 @@ Rails.application.routes.draw do
   resources :citations
   resources :authors
 
-  get 'search', to: 'search#new'
-  post 'search', to: 'search#create'
-  get 'results', to: 'search#results'
+root 'sessions#new'
+
+get '/search' => 'searches#show'
+post '/search' => 'searches#show'
+get '/login' => 'sessions#new'
+post '/login' => 'sessions#create'
+post '/logout' => 'sessions#destroy'
+get '/hello' => 'users#show'
+get '/signup' => 'users#new'
+post '/signup' => 'users#create'
   
 end

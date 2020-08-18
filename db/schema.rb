@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2020_08_17_164446) do
   create_table "bibliographies", force: :cascade do |t|
     t.string "name"
     t.string "style"
-    t.string "type"
+    t.string "use"
     t.integer "user_id"
   end
 

@@ -3,7 +3,7 @@ class CreateBibliographies < ActiveRecord::Migration[6.0]
     create_table :bibliographies do |t|
       t.string :name
       t.string :style
-      t.string :type
+      t.string :use
       t.integer :user_id
     end
   end

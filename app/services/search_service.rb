@@ -1,6 +1,7 @@
-class LibraryService
+class SearchService
+    attr_accessor :results
 
-    def get_results(query)
+    def initialize(query)
         append = ""
         query.each do |k,v|
             if v != nil && v != ""
@@ -11,7 +12,7 @@ class LibraryService
         response = HTTP.get("https://api.lib.harvard.edu/v2/items.json?#{search_parameters}")
         parsed_response = JSON.parse(response)
         if parsed_response["items"] != nil
-            parsed_response["items"]["mods"]
+            @results = parsed_response["items"]["mods"]
         else
             nil
         end

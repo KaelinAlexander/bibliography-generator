@@ -1,0 +1,8 @@
+<h1>Bibliography Index Page</h1>
+<% if @bibliographies %>
+<% @bibliographies.each do |bib| %>
+<%= bib.name %>
+<% end %>
+<% else %>
+<p>There are no bibliograhies to display. Make one?</p>
+<% end %>
