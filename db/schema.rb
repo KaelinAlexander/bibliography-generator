@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2020_08_17_164446) do
   create_table "authors", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "type"
+    t.string "author_type"
     t.integer "text_id"
   end
 

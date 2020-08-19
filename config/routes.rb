@@ -16,5 +16,6 @@ get '/hello' => 'users#show'
 get '/signup' => 'users#new'
 post '/signup' => 'users#create'
 get 'bibliographies/:id/delete' => 'bibliographies#confirm'
+get 'texts/:id/delete' => 'texts#confirm'
   
 end
