@@ -14,12 +14,16 @@
 <% end %>
 <br>
 <% if @search && @search.results %>
-<ul>
     <% @search.results.each do |text| %>
-    <li>Title: <%= get_title(text) %><% if get_subtitle(text) != nil %>: <%= get_subtitle(text) %><% end %></li>
+    <ul>
+    <li>Title: <%= get_title(text) %>
+    <% if get_subtitle(text) != nil %>
+    <li>Subtitle: <%= get_subtitle(text) %></li>
+    <% end %>
+    <li><% if edited?(text) == true %>Edited by: <%= get_editors(text) %><% else %>Author(s): <%= author_cleanup(get_authors(text)) %><% end %>
+    </ul>
     <br>
     <% end %>
-</ul>
 <% else %>
 <p>Sorry, your search returned no results. Try entering another field.</p>
 <% end %>
