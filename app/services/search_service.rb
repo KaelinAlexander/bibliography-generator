@@ -9,7 +9,7 @@ class SearchService
             end
         end
         search_parameters = append.chop
-        response = HTTP.get("https://api.lib.harvard.edu/v2/items.json?#{search_parameters}")
+        response = HTTP.get("https://api.lib.harvard.edu/v2/items.json?#{search_parameters}&limit=50")
         parsed_response = JSON.parse(response)
         if parsed_response["items"] != nil
             @results = parsed_response["items"]["mods"]
@@ -66,11 +66,5 @@ class SearchService
             end
         end 
     end
-
-    def get_author(text_hash)
-
-    end
-
-    # def get_
 
 end

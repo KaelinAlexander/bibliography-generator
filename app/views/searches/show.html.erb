@@ -21,6 +21,7 @@
     <li>Subtitle: <%= get_subtitle(text) %></li>
     <% end %>
     <li><% if edited?(text) == true %>Edited by: <%= get_editors(text) %><% else %>Author(s): <%= author_cleanup(get_authors(text)) %><% end %>
+    <li>Published by: <%= get_publisher(text) %></li> in <%= get_pub_date(text) %>.
     </ul>
     <br>
     <% end %>

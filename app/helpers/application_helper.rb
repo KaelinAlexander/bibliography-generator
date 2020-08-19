@@ -90,14 +90,6 @@ module ApplicationHelper
     end
 
     def get_editors(text_hash)
-        # edited?(text_hash)
-        #     check_hash
-        #     byebug
-        # else 
-        #     nil
-        # end
-
-        # if text_hash["note"]
           check_hash = ""
             text_hash["note"].each do |h|
                 if h.class == Hash
@@ -112,6 +104,69 @@ module ApplicationHelper
             end
         check_hash.gsub("edited by", "").chop
     end
+
+    def get_publisher(text_hash)
+        if text_hash["originInfo"]
+            if text_hash["originInfo"].class == Hash
+                text_hash["originInfo"]["publisher"]
+            else
+                text_hash["originInfo"][0]["publisher"]
+            end
+        else
+            "No publisher listed."
+        end
+    end
+
+    def get_pub_date(text_hash)
+        if text_hash["originInfo"]
+            if text_hash["originInfo"].class == Hash
+                if text_hash["originInfo"]["dateIssued"]
+                    if text_hash["originInfo"]["dateIssued"].class == String
+                        pd = text_hash["originInfo"]["dateIssued"]
+                    elsif text_hash["originInfo"]["dateIssued"].class == Array
+                        pd = text_hash["originInfo"]["dateIssued"][0]
+                    else
+                        pd = text_hash["originInfo"]["dateIssued"]["#text"]
+                    end
+                else
+                    pd = "No date listed"
+                end
+            else
+                if text_hash["originInfo"][0]["dateIssued"]
+                    if text_hash["originInfo"][0]["dateIssued"].class == String
+                        pd = text_hash["originInfo"][0]["dateIssued"]
+                    elsif text_hash["originInfo"][0]["dateIssued"].class == Array
+                        pd = text_hash["originInfo"][0]["dateIssued"][0]
+                    else
+                        pd = text_hash["originInfo"][0]["dateIssued"]["#text"]
+                    end
+                else
+                    pd = "No date listed."
+                end
+            end
+        else
+            pd = "No date listed"
+        end
+        if pd.class == Hash
+            pd = pd["#text"]
+        end
+        pd
+    end
+
+    # def get_pub_city(text_hash)
+    #     if text_hash["originInfo"]
+    #         if text_hash["originInfo"].class == Hash
+    #             if text_hash["originInfo"]["place"].class == Hash
+    #                 text_hash["originInfo"]["place"]["placeTerm"]["#text"]
+    #             elsif text_hash["originInfo"]["place"].class == Array
+
+    #         elsif text_hash["originInfo"].class == Array
+        
+    #         end
+    #     else
+    #         "No city listed."
+    #     end
+    # end
 
     def author_cleanup(author_array)
         if author_array != ["No author."]
@@ -133,7 +188,6 @@ module ApplicationHelper
             chopped = "No author."
         end
     end
-
 
     def logged_in
         !!session[:user_id]

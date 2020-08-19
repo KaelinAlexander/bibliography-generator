@@ -1,6 +1,22 @@
 <h1>Make a Text by Title</h1>
 <%= form_for @text do |f| %>
-<%= f.label 'Text Title' %><br>
+<%= f.label 'Title' %><br>
 <%= f.text_field :title %><br>
-<%= f.submit "Submit Search" %>
+<%= f.label 'Subtitle' %><br>
+<%= f.text_field :title %><br>
+<%= f.label 'Text Editor(s)' %><br>
+<%= f.text_field :editor %><br>
+<%= f.label 'Edition' %><br>
+<%= f.text_field :edition %><br>
+<%= f.label 'Publisher' %><br>
+<%= f.text_field :publisher %><br>
+<%= f.label 'Publication State/Region' %><br>
+<%= f.text_field :pub_state %><br>
+<%= f.label 'Publication City' %><br>
+<%= f.text_field :pub_city %><br>
+<%= f.label 'Publication Year' %><br>
+<%= f.text_field :pub_year %><br>
+<%= f.label 'Translator' %><br>
+<%= f.text_field :translator %><br>
+<%= f.submit "Submit" %>
 <% end %>

@@ -8,6 +8,9 @@ class CreateTexts < ActiveRecord::Migration[6.0]
       t.string :editor
       t.string :translator
       t.integer :edition
+      t.string :publisher
+      t.string :pub_state
+      t.string :pub_city
       t.integer :pub_year
       t.string :pub_season
       t.integer :pub_month
