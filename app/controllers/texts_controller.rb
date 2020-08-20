@@ -18,7 +18,6 @@ class TextsController < ApplicationController
     end
 
     def create
-        byebug
         @text = Text.new(text_params)
         if @text.save
             redirect_to @text
