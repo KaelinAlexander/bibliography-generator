@@ -89,22 +89,48 @@ module ApplicationHelper
         end
     end
 
+    # def get_editors(text_hash)
+    #       check_hash = ""
+    #         text_hash["note"].each do |h|
+    #             if h.class == Hash
+    #                 h.each do |k, v|
+    #                     if v.include?("edited")
+    #                         check_hash = v
+    #                     else
+    #                         nil
+    #                     end
+    #                 end
+    #             end
+    #         end
+    #     check_hash.gsub("edited by", "").chop
+    # end
+
     def get_editors(text_hash)
-          check_hash = ""
-            text_hash["note"].each do |h|
-                if h.class == Hash
-                    h.each do |k, v|
-                        if v.include?("edited")
-                            check_hash = v
-                        else
-                            nil
+        editors = []
+        if text_hash["name"].class == Array
+                text_hash["name"].each do |name|
+                    if name["role"] && name["role"].class == Hash && name["role"]["roleTerm"] && name["role"]["roleTerm"]["#text"] && name["role"]["roleTerm"]["#text"] == "ed."
+                        editors << name["namePart"]
+                    elsif name["role"] && name["role"].class == Hash && name["role"]["roleTerm"] && name["role"]["roleTerm"]["#text"] && name["role"]["roleTerm"]["#text"] == "editor."
+                        editors << name["namePart"]
+                    elsif name["role"] && name["role"].class == Array
+                        name["role"].each do |role|
+                            if role["roleTerm"]["#text"] && role["roleTerm"]["#text"] == "ed."
+                                editors << name["namePart"]
+                            elsif role["roleTerm"]["#text"] && role["roleTerm"]["#text"] == "editor."
+                                editors << name["namePart"]
+                            else
+                                nil
+                            end
                         end
                     end
                 end
-            end
-        check_hash.gsub("edited by", "").chop
+        else
+            editors << "No editor(s)."
+        end
+        editors
     end
-
+    
     def get_publisher(text_hash)
         if text_hash["originInfo"]
             if text_hash["originInfo"].class == Hash
