@@ -15,24 +15,40 @@
 <br>
 <% if @search && @search.results %>
     <% @search.results.each do |text| %>
+        <% @title = get_title(text) %>
+        <% @subtitle = get_subtitle(text) %>
+        <% @editors = get_editors(text) %>
+        <% @authors = new_authors(get_authors(text), get_editors(text)) %>
+        <% @publisher = get_publisher(text) %>
+        <% @pub_year = get_pub_year(text) %>
         <ul>
-        <li>Title: <%= get_title(text) %>
-        <% if get_subtitle(text) != nil %><li>Subtitle: <%= get_subtitle(text) %></li><% end %>
-        <li>Author(s): <%= author_cleanup(get_authors(text)) %></li>
-        <li><% if get_editors(text) != ["No editor(s)."] && !get_editors(text).empty? %> Edited by: <%= get_editors(text) %><% end %>
-        <li>Published by: <%= get_publisher(text) %></li> in <%= get_pub_year(text) %>.
+        <li>Title: <%= @title  %><% if @subtitle != nil %>: <%= @subtitle %><% end %></li>       
+        <li>Author(s): <%= creator_cleanup(@authors) %></li>
+        <li><% if @editors != ["No editor(s)."] && !@editors.empty? %> Edited by: <%= creator_cleanup(@editors) %><% end %>
+        <li>Published by: <%= @publisher %> in <%= @pub_year %>.</li>
         </ul>
         <%= form_tag texts_path do %>
-            <%= hidden_field_tag :'text[title]', get_title(text) %>
-            <%= hidden_field_tag :'text[subtitle]', get_subtitle(text) %>
-            <%= hidden_field_tag :'text[publisher]', get_publisher(text) %>
-            <%= hidden_field_tag :'text[pub_date]', get_pub_year(text) %>
-                <% get_authors_full_names(get_authors(text)).each do |author| %>
+            <%= hidden_field_tag :'text[title]', @title %>
+            <%= hidden_field_tag :'text[subtitle]', @subtitle%>
+            <%= hidden_field_tag :'text[publisher]', @publisher %>
+            <%= hidden_field_tag :'text[pub_year]', @pub_year %>
+
+                <% get_creators_full_names(@authors).each do |author| %>
                 <%= hidden_field_tag :'text[authors_attributes][][first_name]', author[:first_name] %>
                 <%= hidden_field_tag :'text[authors_attributes][][last_name]', author[:last_name] %>
                 <%= hidden_field_tag :'text[authors_attributes][][author_type]', author[:author_type] %>
                 <% end %>
+
+                <% get_creators_full_names(@editors).each do |editor| %>
+                <%= hidden_field_tag :'text[authors_attributes][][first_name]', editor[:first_name] %>
+                <%= hidden_field_tag :'text[authors_attributes][][last_name]', editor[:last_name] %>
+                <%= hidden_field_tag :'text[authors_attributes][][author_type]', editor[:author_type] %>
+                <% end %>
+                <%= collection_select(:'text[bibliographies_attributes][:name]', :id, Bibliography.all, :id, :name) %>
+                <%= text_field_tag :'text[bibliographies_attributes][:name]' %>
+
             <%= submit_tag("Add to Library") %>
+
         <% end %>
         <br>
     <% end %>

@@ -37,7 +37,7 @@ class TextsController < ApplicationController
 
     private
     def text_params
-        params.require(:text).permit(:title, :subtitle, :container, :editor, :translator, :edition, :publisher, :pub_state, :pub_city, :pub_year, :authors_attributes => [:first_name, :last_name, :author_type])
+        params.require(:text).permit(:title, :subtitle, :container, :editor, :translator, :edition, :publisher, :pub_state, :pub_city, :pub_year, :authors_attributes => [:first_name, :last_name, :author_type], :bibliographies_attributes => [:id, :name])
     end
 
 end

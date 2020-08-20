@@ -110,15 +110,31 @@ module ApplicationHelper
         if text_hash["name"].class == Array
                 text_hash["name"].each do |name|
                     if name["role"] && name["role"].class == Hash && name["role"]["roleTerm"] && name["role"]["roleTerm"]["#text"] && name["role"]["roleTerm"]["#text"] == "ed."
-                        editors << name["namePart"]
+                        if name["namePart"].class == Array
+                            editors << name["namePart"][0]
+                        else
+                            editors << name["namePart"]
+                        end
                     elsif name["role"] && name["role"].class == Hash && name["role"]["roleTerm"] && name["role"]["roleTerm"]["#text"] && name["role"]["roleTerm"]["#text"] == "editor."
-                        editors << name["namePart"]
+                        if name["namePart"].class == Array
+                            editors << name["namePart"][0]
+                        else
+                            editors << name["namePart"]
+                        end
                     elsif name["role"] && name["role"].class == Array
                         name["role"].each do |role|
                             if role["roleTerm"]["#text"] && role["roleTerm"]["#text"] == "ed."
-                                editors << name["namePart"]
+                                if name["namePart"].class == Array
+                                    editors << name["namePart"][0]
+                                else
+                                    editors << name["namePart"]
+                                end
                             elsif role["roleTerm"]["#text"] && role["roleTerm"]["#text"] == "editor."
-                                editors << name["namePart"]
+                                if name["namePart"].class == Array
+                                    editors << name["namePart"][0]
+                                else
+                                    editors << name["namePart"]
+                                end
                             else
                                 nil
                             end
@@ -128,19 +144,23 @@ module ApplicationHelper
         else
             editors << "No editor(s)."
         end
-        editors
+        editors.uniq
     end
     
     def get_publisher(text_hash)
         if text_hash["originInfo"]
             if text_hash["originInfo"].class == Hash
-                text_hash["originInfo"]["publisher"]
+                publisher = text_hash["originInfo"]["publisher"]
             else
-                text_hash["originInfo"][0]["publisher"]
+                publisher = text_hash["originInfo"][0]["publisher"]
             end
         else
-            "No publisher listed."
+            publisher = "No publisher listed."
         end
+        if publisher.class == Array
+            publisher = publisher[0]
+        end
+        publisher
     end
 
     def get_pub_year(text_hash)
@@ -179,6 +199,14 @@ module ApplicationHelper
         pd
     end
 
+    def new_authors(authors_array, editors_array)
+        just_authors = authors_array.sort - editors_array.sort
+        if just_authors == []
+            just_authors = ["No author."]
+        end
+        just_authors
+    end
+
     # def get_pub_city(text_hash)
     #     if text_hash["originInfo"]
     #         if text_hash["originInfo"].class == Hash
@@ -194,7 +222,7 @@ module ApplicationHelper
     #     end
     # end
 
-    def author_cleanup(authors_array)
+    def creator_cleanup(authors_array)
         if authors_array != ["No author."]
             string_authors = ""
             no_period = []
@@ -215,9 +243,9 @@ module ApplicationHelper
         end
     end
 
-    def get_authors_full_names(authors_array)
+    def get_creators_full_names(creators_array)
         authors_full_names = []
-            authors_array.each do |author|
+            creators_array.each do |author|
             name = {}
                 if author[-1] == "."
                     author = author.chop
