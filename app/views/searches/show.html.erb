@@ -15,16 +15,27 @@
 <br>
 <% if @search && @search.results %>
     <% @search.results.each do |text| %>
-    <ul>
-    <li>Title: <%= get_title(text) %>
-    <% if get_subtitle(text) != nil %>
-    <li>Subtitle: <%= get_subtitle(text) %></li>
+        <ul>
+        <li>Title: <%= get_title(text) %>
+        <% if get_subtitle(text) != nil %><li>Subtitle: <%= get_subtitle(text) %></li><% end %>
+        <li><% if edited?(text) == true %>Edited by: <%= get_editors(text) %><% else %>Author(s): <%= author_cleanup(get_authors(text)) %><% end %>
+        <li>Published by: <%= get_publisher(text) %></li> in <%= get_pub_year(text) %>.
+        </ul>
+        <%= form_tag texts_path do %>
+            <%= hidden_field_tag :'text[title]', get_title(text) %>
+            <%= hidden_field_tag :'text[subtitle]', get_subtitle(text) %>
+            <%= hidden_field_tag :'text[publisher]', get_publisher(text) %>
+            <%= hidden_field_tag :'text[pub_date]', get_pub_year(text) %>
+                <% get_authors_full_names(get_authors(text)).each do |author| %>
+                <%= hidden_field_tag :'text[authors_attributes][][first_name]', author[:first_name] %>
+                <%= hidden_field_tag :'text[authors_attributes][][last_name]', author[:last_name] %>
+                <%= hidden_field_tag :'text[authors_attributes][][author_type]', author[:author_type] %>
+                <% end %>
+            <%= submit_tag("Add to Library") %>
+        <% end %>
+        <br>
     <% end %>
-    <li><% if edited?(text) == true %>Edited by: <%= get_editors(text) %><% else %>Author(s): <%= author_cleanup(get_authors(text)) %><% end %>
-    <li>Published by: <%= get_publisher(text) %></li> in <%= get_pub_date(text) %>.
-    </ul>
-    <br>
-    <% end %>
+
 <% else %>
 <p>Sorry, your search returned no results. Try entering another field.</p>
 <% end %>

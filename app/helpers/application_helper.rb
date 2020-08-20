@@ -117,7 +117,7 @@ module ApplicationHelper
         end
     end
 
-    def get_pub_date(text_hash)
+    def get_pub_year(text_hash)
         if text_hash["originInfo"]
             if text_hash["originInfo"].class == Hash
                 if text_hash["originInfo"]["dateIssued"]
@@ -168,11 +168,11 @@ module ApplicationHelper
     #     end
     # end
 
-    def author_cleanup(author_array)
-        if author_array != ["No author."]
+    def author_cleanup(authors_array)
+        if authors_array != ["No author."]
             string_authors = ""
             no_period = []
-            author_array.each do |author|
+            authors_array.each do |author|
                 if author[-1] == "."
                     author = author.chop
                     a = author.split(", ")
@@ -187,6 +187,24 @@ module ApplicationHelper
         else
             chopped = "No author."
         end
+    end
+
+    def get_authors_full_names(authors_array)
+        authors_full_names = []
+            authors_array.each do |author|
+            name = {}
+                if author[-1] == "."
+                    author = author.chop
+                    a = author.split(", ")
+                else
+                    a = author.split(", ")
+                end
+                    name[:first_name] = a[1]
+                    name[:last_name] = a[0]
+                    name[:author_type] = "author"
+            authors_full_names << name
+            end
+        authors_full_names
     end
 
     def logged_in

@@ -3,6 +3,7 @@ require 'uri'
 class SearchesController < ApplicationController
 
     def show
+        @text = Text.new
         if params[:search]
             query = search_params.to_h
             @search = SearchService.new(query)

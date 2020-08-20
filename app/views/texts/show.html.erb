@@ -1,1 +1,6 @@
 <h4><%= @text.title %><% if @text.subtitle %>: <%= @text.subtitle %><% end %></h4>
+<% byebug %>
+<%= @text.authors.each do |author| %>
+<%= author.first_name %>
+<%= author.last_name %>
+<% end %>
