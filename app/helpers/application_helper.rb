@@ -261,7 +261,8 @@ module ApplicationHelper
         authors_full_names
     end
 
-    def mla_cmos_authors(authors)
+    def mla_cmos_authors(creators)
+        authors = creators.select {|author| author.author_type == "author"}
         new_authors = ""
         if authors.count == 1
             new_authors << "#{authors[0].last_name}, #{authors[0].first_name}."
@@ -281,9 +282,31 @@ module ApplicationHelper
     new_authors
     end
 
+    def authors?(creators)
+        authors = creators.select {|author| author.author_type == "author"}
+        if authors.count > 0
+            true
+        else
+            false
+        end
+    end
 
+    def editors?(creators)
+        editors = creators.select {|author| author.author_type == "editor"}
+        if editors.count > 0
+            true
+        else
+            false
+        end
+    end
+    
     def mla_cmos_title(title)
+        title.titlecase
+    end
 
+    def mla_cmos_editors(creators)
+        editors = creators.select {|author| author.author_type == "editor"}
+        new_editors = ""
     end
 
     def logged_in
