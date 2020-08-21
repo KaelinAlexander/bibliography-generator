@@ -1,5 +1,5 @@
 <ul>
 <% @bibliography.citations.each do |citation| %>
-<li><% if authors?(citation.text.authors) %><%= mla_cmos_authors(citation.text.authors) %><% end %><i><%= mla_cmos_title(citation.text.title) %></i>. <% if editors?(citation.text.authors) %> <%= mla_cmos_editors(citation.text.authors) %><% end %></li>
+<li><% if authors?(citation.text.authors) %><%= mla_cmos_authors(citation.text.authors) %><% end %> <i><%= mla_cmos_title(citation.text.title) %></i><% if editors?(citation.text.authors) %><%= mla_cmos_editors(citation.text.authors) %><% else %>.<% end %> <%= citation.text.publisher %>, <%= citation.text.pub_year %></li>
 <% end %>
 </ul>

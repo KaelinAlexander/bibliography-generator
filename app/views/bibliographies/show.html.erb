@@ -5,6 +5,7 @@
 <h4><%= @bibliography.name %></h4>
 <h5><%= @bibliography.use if @bibliography.use %></h5>
 <hr>
+<% if !@bibliography.citations.empty? %>
 <%= render 'style' %>
 <% if @bibliography.style == "Chicago" %>
 <%= render 'chicago' %>
@@ -12,4 +13,7 @@
 <%= render 'mla' %>
 <% elsif @bibliography.style == "APA" %>
 <%= render 'apa' %>
+<% end %>
+<% else %>
+<p>Currently, there are no texts on this list. <%= link_to "Add one?", texts_path %><p>
 <% end %>

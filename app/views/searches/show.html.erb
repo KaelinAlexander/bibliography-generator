@@ -14,6 +14,7 @@
 <% end %>
 <br>
 <% if @search && @search.results %>
+    <%= render 'results' %>
     <% @search.results.each do |text| %>
         <% @title = get_title(text) %>
         <% @subtitle = get_subtitle(text) %>
@@ -43,7 +44,7 @@
                 <% get_creators_full_names(@editors).each do |editor| %>
                 <%= hidden_field_tag :'text[authors_attributes][][first_name]', editor[:first_name] %>
                 <%= hidden_field_tag :'text[authors_attributes][][last_name]', editor[:last_name] %>
-                <%= hidden_field_tag :'text[authors_attributes][][author_type]', editor[:author_type] %>
+                <%= hidden_field_tag :'text[authors_attributes][][author_type]', "editor" %>
                 <% end %>
                 <% end %>
                 

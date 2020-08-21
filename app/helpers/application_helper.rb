@@ -89,22 +89,6 @@ module ApplicationHelper
         end
     end
 
-    # def get_editors(text_hash)
-    #       check_hash = ""
-    #         text_hash["note"].each do |h|
-    #             if h.class == Hash
-    #                 h.each do |k, v|
-    #                     if v.include?("edited")
-    #                         check_hash = v
-    #                     else
-    #                         nil
-    #                     end
-    #                 end
-    #             end
-    #         end
-    #     check_hash.gsub("edited by", "").chop
-    # end
-
     def get_editors(text_hash)
         editors = []
         if text_hash["name"].class == Array
@@ -301,12 +285,27 @@ module ApplicationHelper
     end
     
     def mla_cmos_title(title)
-        title.titlecase
+        "#{title.titlecase}"
     end
 
     def mla_cmos_editors(creators)
         editors = creators.select {|author| author.author_type == "editor"}
-        new_editors = ""
+        new_editors = ", edited by "
+        if editors.count == 1
+            new_editors << "#{editors[0].first_name} #{editors[0].last_name}."
+        elsif editors.count == 2
+            new_editors << "#{editors[0].first_name} #{editors[0].last_name} and #{editors[1].first_name} #{editors[1].last_name}."
+        else
+            editors.each do |editor|
+                if editors.index(editor) == 0
+                    new_editors << "#{editor.last_name}, #{editor.first_name},"
+                elsif author == authors.last
+                    new_editors << " and #{editor.first_name} #{editor.last_name}."
+                else
+                    new_editors << " #{editor.first_name} #{editor.last_name},"
+                end
+            end
+        end
     end
 
     def logged_in
