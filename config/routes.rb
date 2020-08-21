@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
-  resources :users
+  resources :users do  
+    resources :bibliographies, only: [:index, :new, :create]
+  end
   
-  resources :bibliographies
-  
-  resources :texts
+  resources :texts do
+    resources :authors, only: [:index, :new, :create]
+  end
 
+  resources :bibliographies, only: [:show, :edit, :update, :destroy]
+  resources :authors, only: [:show, :edit, :update, :destroy]
   resources :citations
-  resources :authors
+
 
 root 'sessions#new'
 

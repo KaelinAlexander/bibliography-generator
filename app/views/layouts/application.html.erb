@@ -25,7 +25,7 @@
         <li><%= link_to "Sign Up", "/signup" %></li>
         <li><%= link_to "Login", "/login" %></li>
         <% else %>
-        <li><%= link_to "Bibliographies", bibliographies_path %></li>
+        <li><%= link_to "Bibliographies", user_bibliographies_path(session[:id]) %></li>
         <li><%= link_to "Texts", texts_path %></li>
         <li><%= link_to "Search", search_path %></li>
         <li><a href="/users/<%= session[:user_id] %>"><i class='material-icons' style='margin-top: 4px'>account_box</i></a></li>
