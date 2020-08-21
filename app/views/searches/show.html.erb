@@ -46,7 +46,11 @@
                 <%= hidden_field_tag :'text[authors_attributes][][author_type]', editor[:author_type] %>
                 <% end %>
                 <% end %>
-                <!--<%= text_field_tag :'text[bibliographies_attributes][][name]' %>-->
+                
+                <!-- 
+                <%= collection_select(:text, :bibliography_ids, Bibliography.all, :id, :name, {:include_blank => 'Select Existing Bibliography'}) %>
+                <%= text_field_tag :'text[bibliographies_attributes][][name]' %> 
+                -->
 
             <%= submit_tag("Add to Library") %>
 

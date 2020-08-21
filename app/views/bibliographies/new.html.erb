@@ -1,33 +1,3 @@
-<% if @bib.errors.any? %>
-<div id="error_explanation">
-<h4>
-<%= pluralize(@bib.errors.count, "error") %>
-prohibited this bibliography from being saved:
-</h4>
- 
-<ul>
-<% @bib.errors.full_messages.each do |msg| %>
-<li><%= msg %></li>
-<% end %>
-</ul>
-</div>
-<% end %>
-
-
-<% @style = [["MLA", "MLA"], ["Chicago Style", "Chicago"], ["APA", "APA"]] %>
-<h1>Bibliography New Page</h1>
-<%= form_for @bib do |f| %>
-<%= f.label :name %>
-<%= f.text_field :name %>
-<br>
-<br>
-<%= f.label :use %>
-<%= f.text_field :use %>
-<br>
-<br>
-<%= f.label 'Default Style' %>
-<%= f.select(:style, options_for_select(@style)) %>
-<br>
-<br>
-<%= f.submit %>
-<% end %>
+<h4>Make a New Bibliography</h4>
+<%= render partial: 'partials/errors', locals: {local_model: @bibliography} %>
+<%= render 'form' %>

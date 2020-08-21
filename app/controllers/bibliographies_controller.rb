@@ -6,36 +6,42 @@ class BibliographiesController < ApplicationController
     end
 
     def index
-        @bibs = Bibliography.all
+        @bibliographies = Bibliography.all
     end
 
     def new
-        @bib = Bibliography.new
+        @bibliography = Bibliography.new
     end
 
     def create
         @user = User.find(session[:user_id])
-        @bib = @user.bibliographies.build(bibliography_params)
-        if @bib.save
-            redirect_to bibliography_path(@bib)
+        @bibliography = @user.bibliographies.build(bibliography_params)
+        if @bibliography.save
+            redirect_to bibliography_path(@bibliography)
         else
             render :new
         end
     end
 
     def edit
-        @bib = Bibliography.find(params[:id])
+        @bibliography = Bibliography.find(params[:id])
     end
 
     def update
-        @bib = Bibliography.find(params[:id])
-        @bib.update(bibliography_params)
-            redirect_to bibliography_path(@bib)
+        @bibliography = Bibliography.find(params[:id])
+        @bibliography.update(bibliography_params)
+            redirect_to bibliography_path(@bibliography)
     end
 
+    def style
+        @bibliography = Bibliography.find(params[:id])
+        @bibliography.style = params[:bibliography][:style]
+        @bibliography.save
+            render :show
+    end
 
     def confirm
-        @bib = Bibliography.find(params[:id])
+        @bibliography = Bibliography.find(params[:id])
     end
 
     def destroy

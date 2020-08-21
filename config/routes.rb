@@ -1,13 +1,9 @@
 Rails.application.routes.draw do
-  resources :users do
-
-  resources :bibliographies do
-    resources :citations, only: [:show, :new, :index]
-  end
+  resources :users
   
-  resources :texts do
-    resources :citations, only: [:show, :new, :index]
-  end
+  resources :bibliographies
+  
+  resources :texts
 
   resources :citations
   resources :authors
@@ -24,5 +20,6 @@ get '/signup' => 'users#new'
 post '/signup' => 'users#create'
 get 'bibliographies/:id/delete' => 'bibliographies#confirm'
 get 'texts/:id/delete' => 'texts#confirm'
+patch 'bibliographies/:id/style' => 'bibliographies#style'
   
 end

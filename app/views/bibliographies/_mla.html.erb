@@ -1,0 +1,5 @@
+<ul>
+<% @bibliography.citations.each do |citation| %>
+<li><%= mla_cmos_authors(citation.text.authors) %>.</li>
+<% end %>
+</ul>

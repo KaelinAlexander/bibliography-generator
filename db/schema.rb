@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_21_173327) do
+ActiveRecord::Schema.define(version: 2020_08_17_164446) do
 
   create_table "authors", force: :cascade do |t|
     t.string "first_name"
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 2020_08_21_173327) do
     t.string "citation_type"
     t.integer "bibliography_id"
     t.integer "text_id"
-    t.index "\"bibliography\", \"text\"", name: "index_citations_on_bibliography_and_text", unique: true
   end
 
   create_table "texts", force: :cascade do |t|

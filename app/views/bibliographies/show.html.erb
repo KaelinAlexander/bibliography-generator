@@ -2,9 +2,14 @@
 <a href='/<%= @bibliography.id %>/citations/new' style='color:white'>Add Citation</a>
 <i class='material-icons right'>add</i>
 </button>
-<h1>Bibliography Show Page</h1>
-<ul>
-<% @bibliography.citations.each do |citation| %>
-<li><%= citation.text.title %></li>
+<h4><%= @bibliography.name %></h4>
+<h5><%= @bibliography.use if @bibliography.use %></h5>
+<hr>
+<%= render 'style' %>
+<% if @bibliography.style == "Chicago" %>
+<%= render 'chicago' %>
+<% elsif @bibliography.style == "MLA" %>
+<%= render 'mla' %>
+<% elsif @bibliography.style == "APA" %>
+<%= render 'apa' %>
 <% end %>
-</ul>

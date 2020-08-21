@@ -1,0 +1,14 @@
+<% if local_model.errors.any? %>
+<div id="error_explanation">
+<h4>
+<%= pluralize(local_model.errors.count, "error") %>
+prohibited this record from being saved:
+</h4>
+ 
+<ul>
+<% local_model.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+<% end %>
+</ul>
+</div>
+<% end %>

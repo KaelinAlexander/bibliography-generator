@@ -261,6 +261,31 @@ module ApplicationHelper
         authors_full_names
     end
 
+    def mla_cmos_authors(authors)
+        new_authors = ""
+        if authors.count == 1
+            new_authors << "#{authors[0].last_name}, #{authors[0].first_name}."
+        elsif authors.count == 2
+            new_authors << "#{authors[0].last_name}, #{authors[0].first_name} and #{authors[1].first_name} #{authors[1].last_name}."
+        else
+            authors.each do |author|
+                if authors.index(author) == 0
+                    new_authors << "#{author.last_name}, #{author.first_name},"
+                elsif author == authors.last
+                    new_authors << " and #{author.first_name} #{author.last_name}."
+                else
+                    new_authors << " #{author.first_name} #{author.last_name},"
+                end
+            end
+        end
+    new_authors
+    end
+
+
+    def mla_cmos_title(title)
+
+    end
+
     def logged_in
         !!session[:user_id]
     end
