@@ -8,6 +8,7 @@ class TextsController < ApplicationController
 
     def show
         @text = Text.find(params[:id])
+        @citation = @text.citations.build(:text_id => params[:id])
     end
 
     def new
@@ -26,6 +27,16 @@ class TextsController < ApplicationController
         end
     end
 
+    def edit
+        @text = Text.find(params[:id])
+    end
+
+    def update
+        @text = Text.find(params[:id])
+        @text.update(text_params)
+            redirect_to text_path(@text)
+    end
+
     def confirm
         @text = Text.find(params[:id])
     end
@@ -37,7 +48,7 @@ class TextsController < ApplicationController
 
     private
     def text_params
-        params.require(:text).permit(:title, :subtitle, :container, :editor, :translator, :edition, :publisher, :pub_state, :pub_city, :pub_year, :authors_attributes => [:first_name, :last_name, :author_type], :bibliographies_attributes => [:id, :name])
+        params.require(:text).permit(:title, :subtitle, :edition, :publisher, :pub_year, :authors_attributes => [:first_name, :last_name, :author_type], :bibliographies_attributes => [:id, :name])
     end
 
 end

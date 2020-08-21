@@ -1,0 +1,37 @@
+<%= form_for @text do |text_builder| %>
+<%= text_builder.label :title %><br>
+<%= text_builder.text_field :title %><br>
+<%= text_builder.label :subtitle %><br>
+<%= text_builder.text_field :subtitle %><br>
+
+<%= text_builder.fields_for :authors do |author_builder| %>
+<fieldset>
+<legend><%= author_builder.object.author_type.capitalize %></legend>
+<%= author_builder.label 'First Name' %>
+<%= author_builder.text_field :first_name %><br>
+<%= author_builder.label 'Last Name' %>
+<%= author_builder.text_field :last_name %><br>
+<%= author_builder.hidden_field :author_type %>
+<% if author_builder.object.first_name != nil %>
+<%= button_to "Remove #{author_builder.object.author_type.capitalize}", author_path(author_builder.object), method: :delete %>
+<% end %>
+</fieldset>
+<% end %>
+<br>
+<br>
+<fieldset>
+<legend>Publication Information</legend>
+<%= text_builder.label 'Edition' %><br>
+<%= text_builder.text_field :edition %><br>
+<%= text_builder.label 'Publisher' %><br>
+<%= text_builder.text_field :publisher %><br>
+<%= text_builder.label 'Publication State/Region' %><br>
+<%= text_builder.text_field :pub_state %><br>
+<%= text_builder.label 'Publication City' %><br>
+<%= text_builder.text_field :pub_city %><br>
+<%= text_builder.label 'Publication Year' %><br>
+<%= text_builder.text_field :pub_year %><br>
+</fieldset>
+
+<%= text_builder.submit "Submit" %>
+<% end %>

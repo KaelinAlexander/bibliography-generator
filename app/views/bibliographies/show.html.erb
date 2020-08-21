@@ -1,1 +1,10 @@
+<button class='btn grey waves-effect waves-light text-white right'>
+<a href='/<%= @bibliography.id %>/citations/new' style='color:white'>Add Citation</a>
+<i class='material-icons right'>add</i>
+</button>
 <h1>Bibliography Show Page</h1>
+<ul>
+<% @bibliography.citations.each do |citation| %>
+<li><%= citation.text.title %></li>
+<% end %>
+</ul>

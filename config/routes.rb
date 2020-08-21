@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  resources :users
-  resources :bibliographies
-  resources :texts
+  resources :users do
+
+  resources :bibliographies do
+    resources :citations, only: [:show, :new, :index]
+  end
+  
+  resources :texts do
+    resources :citations, only: [:show, :new, :index]
+  end
+
   resources :citations
   resources :authors
 

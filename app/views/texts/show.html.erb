@@ -1,6 +1,11 @@
 <h4><%= @text.title %><% if @text.subtitle %>: <%= @text.subtitle %><% end %></h4>
 <% @text.authors.each do |author| %>
-<%= author.first_name %>
-<%= author.last_name %>
+<%= author.first_name %> <%= author.last_name %>
 <br>
 <% end %>
+<%= form_for @citation do |f| %>
+<%= f.label "Add to a Bibliography" %>
+<%= f.collection_select :bibliography_id, Bibliography.all, :id, :name %>
+<%= f.hidden_field :text_id %> 
+<%= f.submit %>
+<% end %> 

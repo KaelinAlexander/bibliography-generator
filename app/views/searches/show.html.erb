@@ -38,14 +38,15 @@
                 <%= hidden_field_tag :'text[authors_attributes][][last_name]', author[:last_name] %>
                 <%= hidden_field_tag :'text[authors_attributes][][author_type]', author[:author_type] %>
                 <% end %>
-
+                
+                <% if @editors != ["No editor(s)."] && !@editors.empty? %> 
                 <% get_creators_full_names(@editors).each do |editor| %>
                 <%= hidden_field_tag :'text[authors_attributes][][first_name]', editor[:first_name] %>
                 <%= hidden_field_tag :'text[authors_attributes][][last_name]', editor[:last_name] %>
                 <%= hidden_field_tag :'text[authors_attributes][][author_type]', editor[:author_type] %>
                 <% end %>
-                <%= collection_select(:'text[bibliographies_attributes][:name]', :id, Bibliography.all, :id, :name) %>
-                <%= text_field_tag :'text[bibliographies_attributes][:name]' %>
+                <% end %>
+                <!--<%= text_field_tag :'text[bibliographies_attributes][][name]' %>-->
 
             <%= submit_tag("Add to Library") %>
 

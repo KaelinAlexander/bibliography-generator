@@ -1,4 +1,4 @@
-<h4>Here's Your Research Library:</h4>
+<h4>Research Library</h4>
 <% if !@texts.empty? %>
 <div class="row">
     <% @texts.each do |text| %>
@@ -7,8 +7,6 @@
         <div class="card-content white-text">
             <span class="card-title"><%= text.title %></span>
             <p><%= text.authors.count %> Creator(s)</p>
-            <br>
-            <p><%= text.media %></p>
             <br>
             <p><%= text.citations.count %> Citation(s)</p>
             <br>
