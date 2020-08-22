@@ -1,21 +1,28 @@
 class AuthorsController < ApplicationController
 
-    def index
-        @authors = Author.all
-    end
-
     def show
         @author = Author.find(params[:id])
     end
 
+    def index
+        if params[:text_id]
+            @text = Text.find(params[:text_id])
+            @authors = @text.authors
+        else
+            @authors = Author.all
+        end
+    end
+
     def new
-        @author = Author.new
+        @text = User.find(params[:text_id])
+        @author = @text.authors.build
     end
 
     def create
-        @author = Author.new(author_params)
+        @text = Text.find(params[:text_id])
+        @author = @text.authors.build(author_params)
         if @author.save
-            redirect_to @author
+            redirect_to text_path(@text)
         else
             render :new
         end

@@ -33,8 +33,12 @@ class TextsController < ApplicationController
 
     def update
         @text = Text.find(params[:id])
-        @text.update(text_params)
+        if params[:text][:title] == "" || params[:text][:title] == nil
+            redirect_to edit_path(@text)
+        else
+            @text.update(text_params)
             redirect_to text_path(@text)
+        end
     end
 
     def confirm
@@ -42,7 +46,9 @@ class TextsController < ApplicationController
     end
 
     def destroy
-        Text.find(params[:id]).destroy
+        @text = Text.find(params[:id])
+        @text.authors.destroy
+        @text.destroy
         redirect_to texts_path
     end
 
