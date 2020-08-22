@@ -7,9 +7,8 @@
 <% if !@text.citations.empty? && @text.citations.last.bibliography != nil %>
 <h5>Cited in:</h5>
 <ul>
-<% byebug %>
 <%= @text.citations.each do |citation| %>
-<li><%= link_to citation.bibliography.name, bibliography_path(citation.bibliography) %></li>
+<li><%= link_to citation.bibliography.name, user_bibliography_path(citation.bibliography) %></li>
 <% end %>
 </ul>
 <% end %>
@@ -24,4 +23,4 @@
 <%= f.submit %>
 <% end %>
 <br>
-<%= link_to "Make a New Bibliography", new_bibliography_path %>
+<%= link_to "Make a New Bibliography", new_user_bibliography_path(session[:user_id]) %>

@@ -15,7 +15,7 @@ class CitationsController < ApplicationController
     def create
         @citation = Citation.new(citation_params)
         if @citation.save
-            redirect_to text_path(@citation.text)
+            redirect_to bibliography_path(@citation.bibliography)
         else
             render :new
         end
