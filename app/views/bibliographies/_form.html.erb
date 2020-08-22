@@ -1,4 +1,5 @@
-<% @style = [["MLA", "MLA"], ["Chicago Style", "Chicago"], ["APA", "APA"]] %>
+<<% @style = [["MLA", "MLA"], ["Chicago Style", "Chicago"], ["APA", "APA"]] %>
+<% byebug %>
 <%= form_for @bibliography do |f| %>
 <%= f.label :name %>
 <%= f.text_field :name %>

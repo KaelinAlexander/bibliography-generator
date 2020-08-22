@@ -1,5 +1,5 @@
 <h4>Bibliography Index Page</h4>
-<% if !@bibliographies.empty? %>
+<% if @bibliographies != nil && !@bibliographies.empty? %>
 <div class="row">
     <% @bibliographies.each do |bib| %>
     <div class="col s12 m6 l4">
@@ -23,5 +23,5 @@
     <% end %>
     </div>
 <% else %>
-<p>There are no bibliograhies to display. <%= link_to "Make one?", new_bibliography_path %></p>
+<p>There are no bibliograhies to display. <%= link_to "Make one?", new_user_bibliography_path %></p>
 <% end %>

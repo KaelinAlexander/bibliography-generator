@@ -6,18 +6,20 @@ class BibliographiesController < ApplicationController
     end
 
     def index
-        @bibliographies = Bibliography.all
+        @user = User.find(params[:user_id])
+        @bibliographies = Bibliography.find_by(user_id: params[:user_id])
     end
 
     def new
-        @bibliography = Bibliography.new
+        @user = User.find(params[:user_id])
+        @bibliography = @user.bibliographies.build
     end
 
     def create
         @user = User.find(session[:user_id])
         @bibliography = @user.bibliographies.build(bibliography_params)
         if @bibliography.save
-            redirect_to bibliography_path(@bibliography)
+            redirect_to user_bibliography_path(@bibliography)
         else
             render :new
         end
@@ -30,7 +32,7 @@ class BibliographiesController < ApplicationController
     def update
         @bibliography = Bibliography.find(params[:id])
         @bibliography.update(bibliography_params)
-            redirect_to bibliography_path(@bibliography)
+            redirect_to user_bibliography_path(@bibliography)
     end
 
     def style
@@ -46,7 +48,7 @@ class BibliographiesController < ApplicationController
 
     def destroy
         Bibliography.find(params[:id]).destroy
-        redirect_to bibliographies_path
+        redirect_to user_bibliographies_path
     end
 
     def bibliography_params
