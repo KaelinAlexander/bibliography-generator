@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     end
     
     def create
-      if !User.all.empty? && params[:user][:password] && params[:user][:username]
+      if !User.all.empty? && params[:user][:password] && params[:user][:password] != "" && params[:user][:username] && params[:user][:username] != ""
         @user = User.find_by(username: params[:user][:username])
         return head(:forbidden) unless
             @user.authenticate(params[:user][:password])

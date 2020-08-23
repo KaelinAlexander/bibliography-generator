@@ -36,12 +36,7 @@ ActiveRecord::Schema.define(version: 2020_08_17_164446) do
   create_table "texts", force: :cascade do |t|
     t.string "title"
     t.string "subtitle"
-    t.string "editor"
-    t.string "translator"
-    t.integer "edition"
     t.string "publisher"
-    t.string "pub_state"
-    t.string "pub_city"
     t.integer "pub_year"
     t.text "notes"
   end

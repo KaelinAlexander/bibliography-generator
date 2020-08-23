@@ -8,6 +8,11 @@ module ApplicationHelper
         end
     end
 
+    def current_bibliographies
+        @user = User.find(session[:user_id])
+        @user.bibliographies
+    end
+
     def get_title(text_hash)
         if text_hash["titleInfo"].class == Hash
             if text_hash["titleInfo"]["nonSort"]
@@ -288,7 +293,27 @@ module ApplicationHelper
         "#{title.titlecase}"
     end
 
-    def mla_cmos_editors(creators)
+    def mla_editors(creators)
+        editors = creators.select {|author| author.author_type == "editor"}
+        new_editors = ". Edited by "
+        if editors.count == 1
+            new_editors << "#{editors[0].first_name} #{editors[0].last_name},"
+        elsif editors.count == 2
+            new_editors << "#{editors[0].first_name} #{editors[0].last_name} and #{editors[1].first_name} #{editors[1].last_name},"
+        else
+            editors.each do |editor|
+                if editors.index(editor) == 0
+                    new_editors << "#{editor.last_name}, #{editor.first_name},"
+                elsif author == authors.last
+                    new_editors << " and #{editor.first_name} #{editor.last_name},"
+                else
+                    new_editors << " #{editor.first_name} #{editor.last_name},"
+                end
+            end
+        end
+    end
+
+    def cmos_editors(creators)
         editors = creators.select {|author| author.author_type == "editor"}
         new_editors = ", edited by "
         if editors.count == 1

@@ -1,8 +1,7 @@
 require 'uri'
 
 class TextsController < ApplicationController
-    before_action :require_login
-
+    
     def index
         @texts = Text.all
     end
@@ -29,19 +28,12 @@ class TextsController < ApplicationController
 
     def edit
         @text = Text.find(params[:id])
-        if @text.authors.count == 0
-            @text.authors.build(:author_type => "author")
-        end
     end
 
     def update
         @text = Text.find(params[:id])
-        if params[:text][:title] == "" || params[:text][:title] == nil
-            redirect_to edit_path(@text)
-        else
-            @text.update(text_params)
+        @text.update(text_params)
             redirect_to text_path(@text)
-        end
     end
 
     def confirm
@@ -57,7 +49,7 @@ class TextsController < ApplicationController
 
     private
     def text_params
-        params.require(:text).permit(:title, :subtitle, :edition, :publisher, :pub_year, :authors_attributes => [:first_name, :last_name, :author_type])
+        params.require(:text).permit(:title, :subtitle, :publisher, :pub_year, :authors_attributes => [:first_name, :last_name, :author_type])
     end
 
 end

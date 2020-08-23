@@ -6,5 +6,5 @@ class Citation < ActiveRecord::Base
     validates_uniqueness_of :bibliography_id, :scope => :text_id
     validates :bibliography_id, presence: true
     validates :text_id, presence: true
-    
+
 end
