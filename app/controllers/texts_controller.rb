@@ -1,7 +1,8 @@
 require 'uri'
 
 class TextsController < ApplicationController
-    
+    before_action :require_login
+
     def index
         @texts = Text.all
     end

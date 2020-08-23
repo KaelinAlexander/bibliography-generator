@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
     def show
-        byebug
         @user = User.find(session[:user_id])
         @bibliographies = @user.bibliographies
     end

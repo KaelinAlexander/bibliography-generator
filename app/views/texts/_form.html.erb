@@ -12,9 +12,6 @@
 <%= author_builder.label 'Last Name' %>
 <%= author_builder.text_field :last_name %><br>
 <%= author_builder.hidden_field :author_type %>
-<% if @text.authors && author_builder.object.first_name != nil && author_builder.object.last_name != "No author" && author_builder.object.id != nil %>
-<%= button_to "Remove #{author_builder.object.author_type.capitalize}", author_path(author_builder.object), method: :delete %>
-<% end %>
 </fieldset>
 <% end %>
 <br>
