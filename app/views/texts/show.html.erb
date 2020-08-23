@@ -1,9 +1,32 @@
-<h4><%= @text.title %><% if @text.subtitle %>: <%= @text.subtitle %><% end %></h4>
+<button class='btn grey waves-effect waves-light text-white left'>
+<a href="https://www.worldcat.org/search?qt=worldcat_org_all&q=<%= @text.title %>" style='color:white'>Find Missing Info</a>
+<i class='material-icons right'>search</i>
+</button>
+<button class='btn grey waves-effect waves-light text-white right'>
+<a href='/texts/<%= @text.id %>/authors/new' style='color:white'>Add an Author/Editor</a>
+<i class='material-icons right'>add</i>
+</button>
+<br>
+<br>
+<button class='btn grey waves-effect waves-light text-white right'>
+<a href='/texts/<%= @text.id %>/edit' style='color:white'>Edit Text</a>
+<i class='material-icons right'>edit</i>
+</button>
+<h4><%= @text.title %><% if @text.subtitle != nil && @text.subtitle != "" %>: <%= @text.subtitle %><% end %></h4>
+<h5>Published by <%= @text.publisher %> in <%= @text.pub_year if @text.pub_year %>.</h5> 
+<br>
+<% if !@text.authors.empty? %>
+<h5>Created by:</h5>
+<br>
 <% @text.authors.each do |author| %>
-<%= author.first_name %> <%= author.last_name %>
+<%= author.first_name %> <%= author.last_name %> (<%= author.author_type.capitalize %>)
+<br>
+<%= link_to "Edit #{author.author_type.capitalize}", edit_author_path(author) %>
+<%= button_to "Remove #{author.author_type.capitalize}", author_path(author), method: :delete %>
 <br>
 <% end %>
 <br>
+<% end %>
 <% if !@text.citations.empty? && @text.citations.last.bibliography != nil %>
 <h5>Cited in:</h5>
 <ul>
@@ -20,7 +43,7 @@
 <%= f.collection_select :bibliography_id, Bibliography.all, :id, :name %>
 <br>
 <%= f.hidden_field :text_id %>
-<%= f.submit %>
+<%= f.submit "Add to Bibliography" %>
 <% end %>
 <br>
 <%= link_to "Make a New Bibliography", new_user_bibliography_path(session[:user_id]) %>

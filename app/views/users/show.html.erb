@@ -1,1 +1,11 @@
-<h1>Hello, <%= current_user %></h1>
+<h4>Hello, <%= current_user %></h4>
+<% if !@bibliographies.empty? %>
+<h5>Here are your current lists and bibliographies:</h5>
+<ul>
+<% @bibliographies.each do |bib| %>
+<li><%= link_to bib.name, bibliography_path(bib) %></li>
+<% end %>
+</ul>
+<% else %>
+<h5>No bibliographies or lists. <%= link_to "Make one?", new_user_bibliography_path(@user) %></h5>
+<% end %>

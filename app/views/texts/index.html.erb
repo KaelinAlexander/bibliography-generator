@@ -1,3 +1,13 @@
+<button class='btn grey waves-effect waves-light text-white right'>
+<a href='/texts/new' style='color:white'>Enter a New Text</a>
+<i class='material-icons right'>add</i>
+</button>
+<br>
+<br>
+<button class='btn grey waves-effect waves-light text-white right'>
+<a href='/search' style='color:white'>Search for a New Text</a>
+<i class='material-icons right'>add</i>
+</button>
 <h4>Research Library</h4>
 <% if !@texts.empty? %>
 <div class="row">
@@ -6,15 +16,16 @@
         <div class="card small grey">
         <div class="card-content white-text">
             <span class="card-title"><%= text.title %></span>
-            <p><%= text.authors.count %> Creator(s)</p>
+            <p><%= text.pub_year if text.pub_year %>
             <br>
+            <br>
+            <p><%= text.authors.count %> Creator(s)</p>
             <p><%= text.citations.count %> Citation(s)</p>
             <br>
         </div>
         <div class="card-action">
             <a class="white-text" href='/texts/<%= text.id %>'><i class="material-icons">format_list_bulleted</i></a>
             <a class="white-text" href='/texts/<%= text.id %>/edit'><i class="material-icons">edit</i></a>
-            <a class="white-text" href='/<%= text.id %>/citations/new'><i class="material-icons">add</i></a>
             <a class="white-text" href='/texts/<%= text.id %>/delete'><i class="material-icons">delete</i></a>
         </div>
         </div>

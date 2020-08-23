@@ -25,5 +25,6 @@ post '/signup' => 'users#create'
 get 'bibliographies/:id/delete' => 'bibliographies#confirm'
 get 'texts/:id/delete' => 'texts#confirm'
 patch 'bibliographies/:id/style' => 'bibliographies#style'
+get '/auth/facebook/callback' => 'sessions#create_omni'
   
 end

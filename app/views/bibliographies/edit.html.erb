@@ -1,2 +1,3 @@
 <h4>Edit <%= @bibliography.name %>:</h4>
+<%= render partial: 'partials/errors', locals: {local_model: @bibliography} %>
 <%= render 'form' %>

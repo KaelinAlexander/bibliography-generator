@@ -1,12 +1,19 @@
 <button class='btn grey waves-effect waves-light text-white right'>
-<a href='/<%= @bibliography.id %>/citations/new' style='color:white'>Add Citation</a>
+<a href='/texts' style='color:white'>Add Citation</a>
 <i class='material-icons right'>add</i>
+</button>
+<br>
+<br>
+<button class='btn grey waves-effect waves-light text-white right'>
+<a href='/bibliographies/<%= @bibliography.id %>/edit' style='color:white'>Edit Bibliography</a>
+<i class='material-icons right'>edit</i>
 </button>
 <h4><%= @bibliography.name %></h4>
 <h5><%= @bibliography.use if @bibliography.use %></h5>
-<hr>
 <% if !@bibliography.citations.empty? %>
 <%= render 'style' %>
+<br>
+<hr>
 <% if @bibliography.style == "Chicago" %>
 <%= render 'chicago' %>
 <% elsif @bibliography.style == "MLA" %>
@@ -15,5 +22,5 @@
 <%= render 'apa' %>
 <% end %>
 <% else %>
-<p>Currently, there are no texts on this list. <%= link_to "Add one?", texts_path %><p>
+<p>Currently, there are no texts in this bibliography. <%= link_to "Add one?", texts_path %><p>
 <% end %>

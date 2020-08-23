@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 
     def show
+        @user = User.find(session[:user_id])
+        @bibliographies = @user.bibliographies
     end
 
     def new
@@ -22,7 +24,7 @@ class UsersController < ApplicationController
            render :new
         end
     end
-    
+
     private
 
     def user_params

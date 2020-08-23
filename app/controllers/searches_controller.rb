@@ -1,6 +1,7 @@
 require 'uri'
 
 class SearchesController < ApplicationController
+    before_action :require_login
 
     def show
         @text = Text.new

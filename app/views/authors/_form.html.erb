@@ -1,0 +1,10 @@
+<% @type = [["Author", "author"], ["Editor", "editor"]] %>
+<%= form_for [@text, @author] do |f| %>
+<%= f.label 'First Name' %>
+<%= f.text_field :first_name %><br>
+<%= f.label 'Last Name' %>
+<%= f.text_field :last_name %><br>
+<%= f.label 'Author or Editor?' %>
+<%= f.select :author_type, @type, options = {include_blank: 'Author or Editor?'}  %>
+<%= f.submit %>
+<% end %>

@@ -14,7 +14,7 @@ class AuthorsController < ApplicationController
     end
 
     def new
-        @text = User.find(params[:text_id])
+        @text = Text.find(params[:text_id])
         @author = @text.authors.build
     end
 
@@ -35,13 +35,13 @@ class AuthorsController < ApplicationController
     def update
         @author = Author.find(params[:id])
         @author.update(author_params)
-            redirect_to @author
+            redirect_to text_path(@author.text)
     end
 
     def destroy
         @author = Author.find(params[:id])
         @text = @author.text
-        @author.destroy unless @text.authors.count == 1
+        @author.destroy
         redirect_to @text
     end
 

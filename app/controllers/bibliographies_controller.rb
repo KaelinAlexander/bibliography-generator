@@ -23,7 +23,7 @@ class BibliographiesController < ApplicationController
         @user = User.find(params[:user_id])
         @bibliography = @user.bibliographies.build(bibliography_params)
         if @bibliography.save
-            redirect_to bibliography_path(@bibliography)
+            redirect_to user_bibliographies_path(@user, @bibliography)
         else
             render :new
         end
@@ -35,8 +35,9 @@ class BibliographiesController < ApplicationController
 
     def update
         @bibliography = Bibliography.find(params[:id])
+        @user = @bibliography.user
         @bibliography.update(bibliography_params)
-            redirect_to user_bibliography_path(@bibliography)
+            redirect_to user_bibliographies_path(@user, @bibliography)
     end
 
     def style

@@ -1,3 +1,7 @@
+<button class='btn grey waves-effect waves-light text-white right'>
+<a href='/users/<%= @user.id %>/bibliographies/new' style='color:white'>New Bibliography</a>
+<i class='material-icons right'>add</i>
+</button>
 <h4>Bibliography Index Page</h4>
 <% if @bibliographies != nil && !@bibliographies.empty? %>
 <div class="row">
@@ -15,7 +19,7 @@
         <div class="card-action">
             <a class="white-text" href='/bibliographies/<%= bib.id %>'><i class="material-icons">format_list_bulleted</i></a>
             <a class="white-text" href='/bibliographies/<%= bib.id %>/edit'><i class="material-icons">edit</i></a>
-            <a class="white-text" href='/<%= bib.id %>/citations/new'><i class="material-icons">add</i></a>
+            <a class="white-text" href='/texts'><i class="material-icons">add</i></a>
             <a class="white-text" href='/bibliographies/<%= bib.id %>/delete'><i class="material-icons">delete</i></a>
         </div>
         </div>

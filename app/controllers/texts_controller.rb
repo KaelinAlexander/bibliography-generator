@@ -1,6 +1,7 @@
 require 'uri'
 
 class TextsController < ApplicationController
+    before_action :require_login
 
     def index
         @texts = Text.all
@@ -13,9 +14,8 @@ class TextsController < ApplicationController
 
     def new
         @text = Text.new
-        @text.authors.build(:author_type => "Author")
-        @text.authors.build(:author_type => "Editor")
-        @text.authors.build(:author_type => "Translator")
+        @text.authors.build(:author_type => "author")
+        @text.authors.build(:author_type => "editor")
     end
 
     def create
@@ -29,6 +29,9 @@ class TextsController < ApplicationController
 
     def edit
         @text = Text.find(params[:id])
+        if @text.authors.count == 0
+            @text.authors.build(:author_type => "author")
+        end
     end
 
     def update

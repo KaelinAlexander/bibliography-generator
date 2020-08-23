@@ -1,0 +1,5 @@
+<% @type = [["Footnote", "footnote"], ["Works Cited", "works_cited"], ["Reference", "reference"]] %>
+<%= form_for citation do |f| %>
+<%= f.select :citation_type, @type, options = {include_blank: 'Citation Type'}  %>
+<%= f.submit %>
+<% end %>

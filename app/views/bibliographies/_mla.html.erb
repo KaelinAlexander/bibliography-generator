@@ -1,5 +1,7 @@
 <ul>
 <% @bibliography.citations.each do |citation| %>
 <li><%= mla_cmos_authors(citation.text.authors) %>.</li>
+<%= render partial: 'citations/form', locals: {citation: citation} %>
+<%= button_to "Remove Citation", citation_path(citation), method: :delete %>
 <% end %>
 </ul>

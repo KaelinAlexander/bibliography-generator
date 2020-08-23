@@ -18,20 +18,13 @@
 </fieldset>
 <% end %>
 <br>
-<br>
 <fieldset>
 <legend>Publication Information</legend>
-<%= text_builder.label 'Edition' %><br>
-<%= text_builder.text_field :edition %><br>
 <%= text_builder.label 'Publisher' %><br>
 <%= text_builder.text_field :publisher %><br>
-<%= text_builder.label 'Publication State/Region' %><br>
-<%= text_builder.text_field :pub_state %><br>
-<%= text_builder.label 'Publication City' %><br>
-<%= text_builder.text_field :pub_city %><br>
 <%= text_builder.label 'Publication Year' %><br>
 <%= text_builder.text_field :pub_year %><br>
 </fieldset>
-
+<br>
 <%= text_builder.submit "Submit" %>
 <% end %>

@@ -19,9 +19,27 @@ class SessionsController < ApplicationController
       end
     end
 
+    def create_omni
+      @user = User.find_or_create_by(uid: auth['uid']) do |u|
+        u.username = auth['info']['name']
+        u.email = auth['info']['email']
+        u.image = auth['info']['image']
+        u.password = auth['uid']
+      end
+      session[:user_id] = @user.id
+      session[:username] = @user.username
+      redirect_to user_path(@user)
+    end
+
     def destroy
       session.clear
       redirect_to login_path
+    end
+
+    private
+
+    def auth
+      request.env['omniauth.auth']
     end
 
 end
