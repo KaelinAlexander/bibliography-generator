@@ -9,11 +9,15 @@ class SessionsController < ApplicationController
     def create
       if !User.all.empty? && params[:user][:password] && params[:user][:password] != "" && params[:user][:username] && params[:user][:username] != ""
         @user = User.find_by(username: params[:user][:username])
-        return head(:forbidden) unless
-            @user.authenticate(params[:user][:password])
-        session[:user_id] = @user.id
-        session[:username] = @user.username
-        redirect_to hello_path
+        if @user != nil
+          return head(:forbidden) unless
+              @user.authenticate(params[:user][:password])
+          session[:user_id] = @user.id
+          session[:username] = @user.username
+          redirect_to hello_path
+        else
+          redirect_to login_path
+        end
       else
         redirect_to login_path
       end
