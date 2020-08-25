@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
         u.username = auth['info']['name']
         u.email = auth['info']['email']
         u.image = auth['info']['image']
-        u.password = auth['uid']
+        u.password = SecureRandom.urlsafe_base64
       end
       session[:user_id] = @user.id
       session[:username] = @user.username

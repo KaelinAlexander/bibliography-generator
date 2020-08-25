@@ -1,4 +1,5 @@
 class AuthorsController < ApplicationController
+    before_action :require_login
 
     def show
         @author = Author.find(params[:id])
