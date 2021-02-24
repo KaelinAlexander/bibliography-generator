@@ -1,26 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to the Bibliography Generator! To get this app up and running:
 
-Things you may want to cover:
+1) Run "yarn install" to install dependencies.
+2) Run "rails db:migrate" to create table migrations.
+3) Run "rails s" to fire up the shotgun server.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-Testing updates here.
-
-* ...
+With the app running, go ahead and choose "Sign Up" to make a new user login.
