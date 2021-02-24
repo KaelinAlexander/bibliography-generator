@@ -40,7 +40,7 @@
 <%= form_for @citation do |f| %>
 <br>
 <%= f.label "Add to a Bibliography" %>
-<%= f.collection_select :bibliography_id, current_bibliographies, :id, :name %>
+<%= f.collection_select(:bibliography_id, current_bibliographies, :id, :name) %>
 <br>
 <%= f.hidden_field :text_id %>
 <%= f.submit "Add to Bibliography" %>

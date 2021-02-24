@@ -2,7 +2,7 @@
 <%= form_for @bibliography, url: { action: "style" }  do |f| %>
 <br>
 <%= f.label 'Current Style' %>
-<%= f.select :style, @style, selected: @bibliography.style %>
+<%= f.select(:style, @style, selected: @bibliography.style) %>
 <br>
 <%= f.hidden_field :name %>
 <%= f.hidden_field :use %>
