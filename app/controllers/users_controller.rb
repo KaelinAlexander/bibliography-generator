@@ -21,7 +21,7 @@ class UsersController < ApplicationController
                     render :new
                 end
         else
-           render :new
+           render :error
         end
     end
 
